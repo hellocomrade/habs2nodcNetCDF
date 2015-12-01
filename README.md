@@ -1,7 +1,7 @@
 # habs2nodcNetCDF
 A tool for generating NODC-compliant NetCDF file with observation data
 
-Requirements:
+#Requirements:
 1. NetCDF C library 4.X;
 2. Python 2.7.X with psycopg2
 3. lua 5.X
@@ -21,22 +21,22 @@ These challenges inspire us to create a package that can be used by memebers in 
 3. A C script was written to make sure combining the outcomes from step 1 and 2 together into a valid file in NetCDF format;
 4. Bash script is on top to automate the whole process and the final product will be a compressed dataset for a platform and its md5sum;
 
-Installation:
+#Installation:
 
 Simply copy files, put them in a folder, then
 
-#make
+make
 
 This should compile C script for you. Make sure you have libnetcdf and liblua available on the machine.
 
 The last step will be store the folder's absolute name on the first line of commom.lua
 
 
-Preparation:
+#Preparation:
 
 In order to have a valid NODC submittal, browse all global metadata attributes inside common.lua.
 
-Usage:
+#Usage:
 
 In order to link a platform with this tool. Two files are necessary, a lua file is needed in platform-config/platform_name folder to specifiy the specific
 metadata attributes. This also includes the location for C script to retrieve the data file for a measurement.
