@@ -7,7 +7,7 @@ A tool for generating NODC-compliant NetCDF file with observation data
 3. lua 5.X
 4. bash
 
-Data processing and massaging is supposed to be a straightforward task. However, There are couple challenges:
+Data processing and massaging are supposed to be straightforward tasks. However, There are couple challenges:
 
 1. Both data and metadata need to be standardized;
 2. Usually data and metadata are managed and maintained by different team member;
