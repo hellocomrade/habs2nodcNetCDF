@@ -119,7 +119,21 @@ Platform={
                               return true
                       end
         },
-
+        ysi_turbidity={
+            standard_name="ysi_turbidity",
+            habs_name="turbidity",
+            short_name="YSI Turbidity",
+            long_name="YSI Turbidity",
+            featureType="timeSeries",
+            units="ntu",
+            source="platform/leash/leash_ysi_turbidity",
+            depth=0.0,
+            keywords="TERRESTRIAL HYDROSPHERE > WATER QUALITY/WATER CHEMISTRY > TURBIDITY",
+            keywords_vocabulary="GCMD Earth Science Keywords. Version 5.3.3",
+            validator=function(val)
+                          return true
+                      end
+        }
     }
 }
 
