@@ -4,8 +4,59 @@ Platform={
     lon=-82.8231,
     lat=41.65912,
     summary="",
-    keywords="GLOS,Gibraltar Island",
+    keywords="GLOS, Ohio State University Stone Laboratory, Gibraltar Island",
     sensors={
+	air_pressure={
+            standard_name="air_pressure",
+            long_name="air_pressure",
+            featureType="timeSeries",
+            units="Pa",
+            source="platform/osugi/osugi_air_press",
+            depth=0.0,
+            keywords="EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC PRESSURE > SEA LEVEL PRESSURE",
+            keywords_vocabulary="GCMD Earth Science Keywords. Version 5.3.3",
+            validator=function(val)
+                          if val>0 or val<1500 then
+                              return true
+                          else
+                              return false
+                          end
+                      end
+        },
+	air_temperature={
+            standard_name="air_temperature",
+            long_name="air_temperature",
+            featureType="timeSeries",
+            units="degree_Celsius",
+            source="platform/osugi/osugi_air_temp",
+            depth=0.0,
+            keywords="EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC TEMPERATURE > AIR TEMPERATURE",
+            keywords_vocabulary="GCMD Earth Science Keywords. Version 5.3.3",
+            validator=function(val)
+                          if val>100 or val<-100 then
+                              return false
+                          else
+                              return true
+                          end
+                      end
+        },
+	relative_humidity={
+            standard_name="relative_humidity",
+            long_name="dew_point_temperature",
+            featureType="timeSeries",
+            units="1",
+            source="platform/osugi/osugi_relative_humidity",
+            depth=0.0,
+            keywords="EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC WATER VAPOR > HUMIDITY",
+            keywords_vocabulary="GCMD Earth Science Keywords. Version 5.3.3",
+            validator=function(val)
+                          if val>1 or val<0 then
+                              return false
+                          else
+                              return true
+                          end
+                      end
+        },
 	sea_surface_water_temperature={
 	    standard_name="sea_water_temperature",
 	    habs_name="water_temperature",
@@ -25,8 +76,59 @@ Platform={
 			  end			
 		      end
 	},
+	sea_water_temperature={
+            standard_name="sea_water_temperature",
+            long_name="Thermistor water temperature",
+            featureType="timeSeriesProfile",
+            units="degree_Celsius",
+            source="platform/osugi/osugi_sea_water_temp",
+            keywords="EARTH SCIENCE > OCEANS > OCEAN TEMPERATURE > WATER TEMPERATURE",
+            keywords_vocabulary="GCMD Earth Science Keywords. Version 5.3.3",
+            comment="In order to query the timestamp for the observation at a node, only the first index(time) is necessary. Assumption is that all nodes should be reported at the same time in a synchronous way.",
+            validator=function(val)
+                          if val>100 or val<-10 then
+                              return false
+                          else
+                              return true
+                          end
+                      end
+        },
+	wind_from_direction={
+            standard_name="wind_from_direction",
+            long_name="wind_from_direction",
+            featureType="timeSeries",
+            units="degree",
+            source="platform/osugi/osugi_wind_direction",
+            depth=0.0,
+            keywords="EARTH SCIENCE > OCEANS > OCEAN WINDS > SURFACE WINDS",
+            keywords_vocabulary="GCMD Earth Science Keywords. Version 5.3.3",
+            validator=function(val)
+                          if val>360 or val<0 then
+                              return false
+                          else
+                              return true
+                          end
+                      end
+        },
+        wind_speed={
+            standard_name="wind_speed",
+            long_name="wind_speed",
+            featureType="timeSeries",
+            units="m s-1",
+            source="platform/osugi/osugi_wind_speed",
+            depth=0.0,
+            keywords="EARTH SCIENCE > OCEANS > OCEAN WINDS > SURFACE WINDS",
+            keywords_vocabulary="GCMD Earth Science Keywords. Version 5.3.3",
+            validator=function(val)
+                          if val>100 or val<0 then
+                              return false
+                          else
+                              return true
+                          end
+                      end
+        },
 	ph={
-	    standard_name="ph",
+	    standard_name="sea_water_ph_reported_on_total_scale",
 	    habs_name="ph",
 	    short_name="pH",
 	    long_name="PH",
@@ -41,7 +143,7 @@ Platform={
 		      end
 	},
 	water_conductivity={
-	    standard_name="water_conductivity",
+	    standard_name="sea_water_electrical_conductivity",
 	    habs_name="water_conductivity",
 	    short_name="Water Conductivity",
 	    long_name="Water Conductivity",
@@ -56,7 +158,7 @@ Platform={
 		      end
 	},
 	dissolved_oxygen={
-	    standard_name="dissolved_oxygen",
+	    standard_name="mole_concentration_of_dissolved_molecular_oxygen_in_sea_water",
 	    habs_name="Dissolved Oxygen",
 	    short_name="Dissolved Oxygen",
 	    long_name="Dissolved Oxygen",
@@ -75,7 +177,7 @@ Platform={
 		      end
 	},
 	dissolved_oxygen_saturation={
-            standard_name="dissolved_oxygen_saturation",
+            standard_name="fractional_saturation_of_oxygen_in_sea_water",
             habs_name="Dissolved Oxygen Saturation",
             short_name="Dissolved Oxygen Saturation",
             long_name="Dissolved Oxygen Saturation",
@@ -89,8 +191,23 @@ Platform={
                               return true
                       end
         },
+	ysi_blue_green_algae={
+            --standard_name="ysi_blue_green_algae",
+            habs_name="blue_green_algae",
+            short_name="YSI Blue Green Algae",
+            long_name="ysi_blue_green_algae",
+            featureType="timeSeries",
+            units="rfu",
+            source="platform/osugi/osugi_ysi_blue_green_algae",
+            depth=0.0,
+            keywords="EARTH SCIENCE > BIOLOGICAL CLASSIFICATION > PLANTS > MICROALGAE",
+            keywords_vocabulary="GCMD Earth Science Keywords. Version 5.3.3",
+            validator=function(val)
+                          return true
+                      end
+        },
 	ysi_chlorophyll={
-	    standard_name="ysi_chlorophyll",
+	    standard_name="concentration_of_chlorophyll_in_sea_water",
 	    habs_name="chlorophyll",
 	    short_name="YSI Chlorophyll",
 	    long_name="YSI Chlorophyll",
@@ -104,23 +221,8 @@ Platform={
                 	  return true
 		      end
 	},
-	ysi_blue_green_algae={
-            standard_name="ysi_blue_green_algae",
-            habs_name="blue_green_algae",
-            short_name="YSI Blue Green Algae",
-            long_name="YSI Blue Green Algae",
-            featureType="timeSeries",
-            units="rfu",
-            source="platform/osugi/osugi_ysi_blue_green_algae",
-            depth=0.0,
-            keywords="EARTH SCIENCE > BIOLOGICAL CLASSIFICATION > PLANTS > MICROALGA",
-            keywords_vocabulary="GCMD Earth Science Keywords. Version 5.3.3",
-            validator=function(val)
-                          return true
-                      end
-        },
 	ysi_turbidity={
-            standard_name="ysi_turbidity",
+            standard_name="sea_water_turbidity",
 	    habs_name="turbidity",
 	    short_name="YSI Turbidity",
             long_name="YSI Turbidity",
