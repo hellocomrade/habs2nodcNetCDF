@@ -301,7 +301,9 @@ function initPlatformInfo(Platform)
 	    v.GlobalAttributes.institution=v.GlobalAttributes.keywords
 	    v.GlobalAttributes.keywords=v.keywords
 	    v.GlobalAttributes.featureType=v.featureType
-	    v.vars.obs.varname=v.habs_name
+	    -- use sensor key name for variable name so that invalid NetCDF
+	    -- variable identifiers are avoided (i.e. spaces in name).
+	    v.vars.obs.varname=k
 	    v.vars.obs.attributes.standard_name=v.standard_name
 	    v.vars.obs.attributes.units=v.units
 	    v.vars.obs.attributes.long_name=v.long_name
